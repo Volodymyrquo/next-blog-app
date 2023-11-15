@@ -1,4 +1,6 @@
 import { Metadata } from 'next';
+import { revalidatePath } from 'next/cache';
+import { redirect } from 'next/navigation';
 type Props = {
     params: {
         id: string;
@@ -21,6 +23,15 @@ export async function generateMetadata({
         title: post.title,
     };
 }
+
+async function removePost(id: string) {
+    'use server';
+    await fetch(`http://localhost:3300/posts/${id}`, {
+        method: 'DELETE',
+    });
+    revalidatePath('/blog');
+    redirect('/blog');
+}
 const Post = async ({ params: { id } }: Props) => {
     const post = await getData(id);
     return (
@@ -28,6 +39,9 @@ const Post = async ({ params: { id } }: Props) => {
             {' '}
             <h1>{post.title}</h1>
             <p>{post.body}</p>
+            <form action={removePost.bind(null, id)}>
+                <input type="submit" value="delete post" />
+            </form>
         </>
     );
 };

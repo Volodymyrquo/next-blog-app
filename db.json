@@ -35,6 +35,24 @@
       "body": "about content",
       "userId": 1,
       "id": 6
+    },
+    {
+      "title": "Hello everyone here",
+      "body": "description",
+      "userId": 1,
+      "id": 7
+    },
+    {
+      "title": "break news",
+      "body": "content about the break news",
+      "userId": 1,
+      "id": 8
+    },
+    {
+      "title": "break news",
+      "body": "content about the breaking news",
+      "userId": 1,
+      "id": 9
     }
   ]
 }
